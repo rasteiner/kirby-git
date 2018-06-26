@@ -1,0 +1,16 @@
+{
+    "name": "rasteiner/kirby-git",
+    "description": "Expose git commands to commaship command panel",
+    "type": "kirby-plugin",
+    "license": "MIT",
+    "minimum-stability": "dev",
+    "authors": [
+        {
+            "name": "Roman Steiner",
+            "email": "roman@toastlab.ch"
+        }
+    ],
+    "require": {
+        "phpeople/git-log-parser": "dev-master"
+    }
+}
