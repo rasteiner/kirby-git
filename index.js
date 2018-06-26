@@ -36,7 +36,7 @@ setTimeout(() => {
       },
       {
         id: 'rollback',
-        label: 'Git Checkout Commit',
+        label: 'Git Checkout',
         description: 'Go back to a specific commit (git checkout -f <hash> && git clean -fd)',
         filter: testVisibility,
         action: (root) => new commaship.Dialogue(async function* () {
