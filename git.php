@@ -106,12 +106,12 @@ class Git {
     };
   }
 
-  public static function checkout_commit() {
+  public static function rollback() {
     return function($hash) {
       Git::get_started();
 
       $hash = escapeshellarg($hash);
-      return ['result' => `git clean -fd && git revert --no-commit $hash..HEAD`];
+      return ['result' => `git clean -fd && git reset --hard $hash`];
     };
   }
 }

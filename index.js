@@ -36,8 +36,8 @@ setTimeout(() => {
       },
       {
         id: 'rollback',
-        label: 'Git Checkout',
-        description: 'Go back to a specific commit (git revert --no-commit <hash>..HEAD)',
+        label: 'Git Hard Reset',
+        description: 'Clean WD and go back to a specific commit (git clean -fd && git reset --hard <hash>)',
         filter: testVisibility,
         action: (root) => new commaship.Dialogue(async function* () {
           const hash = yield root.$api.get('rasteiner-git/commits').then(r => r.result)

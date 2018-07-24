@@ -30,7 +30,7 @@ Kirby::plugin('rasteiner/git', [
     [
       'pattern' => 'api/rasteiner-git/rollback/(:any)',
       'method' => 'GET',
-      'action' => Git::checkout_commit()
+      'action' => Git::rollback()
     ],
     [
       'pattern' => 'api/rasteiner-git/auth',
