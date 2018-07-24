@@ -37,12 +37,19 @@ setTimeout(() => {
       {
         id: 'rollback',
         label: 'Git Checkout',
-        description: 'Go back to a specific commit (git checkout -f <hash> && git clean -fd)',
+        description: 'Go back to a specific commit (git revert --no-commit <hash>..HEAD)',
         filter: testVisibility,
         action: (root) => new commaship.Dialogue(async function* () {
           const hash = yield root.$api.get('rasteiner-git/commits').then(r => r.result)
           root.$api.get(`rasteiner-git/rollback/${hash}`).then(r => window.location.reload())
         })
+      },
+      {
+        id: 'status',
+        label: 'Git Status',
+        description: 'Show git status',
+        filter: testVisibility,
+        action: (root) => root.$api.get(`rasteiner-git/status`).then(r => r.result)
       }
     ])
   }

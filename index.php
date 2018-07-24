@@ -8,6 +8,11 @@ use Kirby;
 Kirby::plugin('rasteiner/git', [
   'routes' => [
     [
+      'pattern' => 'api/rasteiner-git/status',
+      'method' => 'GET',
+      'action' => Git::status()
+    ],
+    [
       'pattern' => 'api/rasteiner-git/commits',
       'method' => 'GET',
       'action' => Git::list_commits()

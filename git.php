@@ -4,10 +4,8 @@ namespace Rasteiner\KirbyGit;
 
 require_once(__DIR__ . '/vendor/autoload.php');
 
-
+use Exception;
 use Kirby;
-use Kirby\Http\Response\Json;
-use Kirby\Http\Response;
 use Kirby\Http\Request;
 
 use Phpeople\Git\Branch;
@@ -47,10 +45,20 @@ class Git {
     return $u !== null && in_array($u->role()->name(), kirby()->option('rasteiner/kirbygit/roles', ['admin']));
   }
 
+
   /* route action closures here */
+
+
   public static function has_auth() {
     return function() {
-      return new Json(['result' => Git::auth()]);
+      return ['result' => Git::auth()];
+    };
+  }
+
+  public static function status() {
+    return function() {
+      Git::get_started();
+      return ['result' => `git status`];
     };
   }
 
@@ -71,7 +79,7 @@ class Git {
         ];
       }
 
-      return new Json(['result' => $commits]);
+      return ['result' => $commits];
     };
   }
 
@@ -86,7 +94,7 @@ class Git {
         $result = "No commit message given";
       }
 
-      return new Json(['result' => $result]);
+      return ['result' => $result];
     };
   }
 
@@ -94,7 +102,7 @@ class Git {
     return function($hash) {
       Git::get_started();
       $hash = escapeshellarg($hash);
-      return new Json(['result' => `git show $hash --stat`]);
+      return ['result' => `git show $hash --stat`];
     };
   }
 
@@ -103,7 +111,7 @@ class Git {
       Git::get_started();
 
       $hash = escapeshellarg($hash);
-      return new Json(['result' => `git checkout -f $hash && git clean -fd`]);
+      return ['result' => `git clean -fd && git revert --no-commit $hash..HEAD`];
     };
   }
 }
